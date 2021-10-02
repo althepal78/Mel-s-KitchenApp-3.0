@@ -1,0 +1,22 @@
+﻿
+<div>
+    <h1>ShowDish</h1>
+    @if (ViewBag.ShowDish != null)
+    {
+        <p>@ViewBag.ShowDish.RecipeName</p>
+        <p>@ViewBag.ShowDish.RecipeMaker.FirstName</p>
+        <p>@ViewBag.ShowDish.Ingredients</p>
+        <p>@ViewBag.ShowDish.Directions</p>
+    }
+
+    @if (ViewBag.ChefID == ViewBag.ShowDish.RecipeMaker.ChefID)
+    {
+        <a asp-controller="Recipe" asp-action="EditRecipe" asp-route-id="@ViewBag.ShowDish.RecipeID">Edit Recipe</a>
+    }
+    else
+    {
+        <p> <h1>You Not The Chef for this Dish </h1></p>
+    }
+
+    <a>Delete Recipe</a>
+</div>

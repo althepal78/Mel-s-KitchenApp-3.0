@@ -1,0 +1,45 @@
+﻿
+<h1>All Our Recipes</h1>
+<h2><a asp-controller="Recipe" asp-action="AddRecipe">Add Recipe</a></h2>
+
+
+<table class="table table-hover">
+    <thead class="thead-dark ">
+        <tr>
+            <th scope="col">Recipe Name </th>
+            <th scope="col">Chef Name</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Recipe ID</th>
+            <th scope="col"> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in ViewBag.AllRecipes)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Recipe" asp-action="ShowDish" asp-route-id="@recipe.RecipeID">
+                        @recipe.RecipeName
+                    </a>
+                </td>
+                <td>@recipe.RecipeMaker.FirstName </td>
+                <td>@recipe.Ingredients </td>
+                <td>@recipe.Directions </td>
+                <td>
+                    @if (ViewBag.ChefInDb.ChefID == recipe.RecipeMaker.ChefID)
+                    {
+                        <a class="btn btn-primary" asp-controller="Recipe" asp-action="EditRecipe" asp-route-id="@recipe.RecipeID">Edit Recipe</a>
+                        <br />
+                        <a class="btn btn-danger" asp-controller="Recipe" asp-action="Delete" asp-route-id="@recipe.RecipeID">Delete</a>
+                    }
+                    else
+                    {
+                        <h3>Nothing to do</h3>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
